@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Hệ thống bình chọn điện tử - VKSND Khu vực 9 An Giang</title>
+<meta name="description" content="Khai báo tài khoản mạng xã hội và trang web cá nhân - VKSND Khu vực 9">
+<title>Khai báo tài khoản MXH - VKSND Khu vực 9</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23b7950b'/%3E%3Ctext x='50' y='66' font-size='52' text-anchor='middle' fill='white'%3E%E2%9A%96%3C/text%3E%3C/svg%3E">
 <style>
   html, body {
     margin: 0;
@@ -11,21 +13,81 @@
     width: 100%;
     height: 100%;
     overflow: hidden;
-    background: #0b3d91;
+    background: linear-gradient(135deg, #8b0000 0%, #c0392b 60%, #922b21 100%);
+  }
+  /* Màn hình chờ hiển thị trong lúc iframe (ứng dụng Apps Script) đang tải,
+     tránh khoảng trắng/xanh lạc tông trước khi ứng dụng thật hiện ra. */
+  #loadingScreen {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    color: #ffffff;
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    text-align: center;
+    padding: 20px;
+    transition: opacity .25s ease;
+  }
+  #loadingScreen.hide {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .loading-emblem {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: #b7950b;
+    border: 2px solid rgba(255,255,255,.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+  }
+  .loading-title {
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .4px;
+    max-width: 320px;
+    line-height: 1.4;
+  }
+  .loading-spinner {
+    width: 26px;
+    height: 26px;
+    border: 3px solid rgba(255,255,255,.35);
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: spin .8s linear infinite;
+  }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
   }
   iframe {
     display: block;
     width: 100%;
     height: 100%;
     border: 0;
+    position: relative;
+    z-index: 1;
   }
 </style>
 </head>
 <body>
+  <div id="loadingScreen">
+    <div class="loading-emblem">⚖</div>
+    <div class="loading-title">Khai báo tài khoản mạng xã hội<br>&amp; trang web cá nhân</div>
+    <div class="loading-spinner"></div>
+  </div>
   <iframe
+    id="appFrame"
+    title="Khai báo tài khoản mạng xã hội - VKSND Khu vực 9"
     src="https://script.google.com/macros/s/AKfycbyv-xugT5uefemDMVcWdsOqJa_H-32VqO-Af32uS4eKv245NqD7bUi6mZ5rX-hLdBMxfg/exec"
     allow="clipboard-write"
-    referrerpolicy="no-referrer-when-downgrade">
+    referrerpolicy="no-referrer-when-downgrade"
+    onload="document.getElementById('loadingScreen').classList.add('hide')">
   </iframe>
 </body>
 </html>
